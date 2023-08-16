@@ -53,11 +53,32 @@ class ContaPoupanca(Banco):
         print('valor depositado na sua conta')
 
     def ver_saldo(self):
-        print('seu saldo eh positivo')
+        print(
+            f'\nNome titular conta = {self.__nome}\n'+
+            f'saldo = {self.__saldo}\n'+
+            f'conta numero: {self.numero_conta}'
+        )
 
     def sacar(self):
-        print('em conta poupanca nao eh possivel sacar')
+        print('\nPrezado cliente em conta poupanca nao eh possivel sacar\n')
  
 
+if __name__ == '__main__':
 
-    
+
+    titular_poupanca_01 = ContaPoupanca(
+        nome='Carlos', 
+        saldo=5000.00, 
+        numero_conta=12345-8
+    )
+    titular_poupanca_02 = ContaPoupanca(
+        nome='Arthur', 
+        saldo=2500.00, 
+        numero_conta=14723-9
+    )
+
+    titular_poupanca_01.ver_saldo()
+    titular_poupanca_02.ver_saldo()
+
+    titular_poupanca_01.sacar()
+
