@@ -10,6 +10,10 @@ from abc import ABC, abstractmethod
 
 class Banco(ABC):
 
+    def __init__(self, nome, saldo, numero_conta):
+        self.nome = nome
+        self.__saldo = saldo
+        self._numero_conta = numero_conta
 
 
     @abstractmethod
@@ -17,7 +21,7 @@ class Banco(ABC):
         pass
 
     @abstractmethod    
-    def ver_saldo(self):
+    def saldo(self):
         pass
 
     @abstractmethod
@@ -27,58 +31,75 @@ class Banco(ABC):
 
 class ContaCorrente(Banco):
 
-    def __init__(self, nome, saldo, numero_conta):
-        self.__nome = nome
-        self.__saldo = saldo
-        self.numero_conta = numero_conta
+    
+    def depositar(self, deposito):
+        if deposito >0:
+            self._Banco__saldo += deposito
+            print('valor depositado na sua conta')
+        else:
+            print('Informe um deposito maoir que zero')
 
-    def depositar(self):
-        print('valor depositado na sua conta')
+    @property
+    def saldo(self):
+        return self._Banco__saldo
 
-    def ver_saldo(self):
-        print('seu saldo eh positivo')
-
-    def sacar(self):
-        print('um valor foi sacado da sua conta')
+    def sacar(self, valor_a_sacar):
+        self._Banco__saldo -= valor_a_sacar
+        print(f'saque de R$ {self.valor_a_sacar} foi realizado com sucesso')
 
 
     
 class ContaPoupanca(Banco):
-    def __init__(self, nome, saldo, numero_conta):
-        self.__nome = nome
-        self.__saldo = saldo
-        self.numero_conta = numero_conta
+    
+    def depositar(self, deposito):
+        if deposito >0:
+            self._Banco__saldo += deposito
+            print('valor depositado na sua conta')
+        else:
+            print('Informe um deposito maoir que zero')
 
-    def depositar(self):
-        print('valor depositado na sua conta')
-
-    def ver_saldo(self):
-        print(
-            f'\nNome titular conta = {self.__nome}\n'+
-            f'saldo = {self.__saldo}\n'+
-            f'conta numero: {self.numero_conta}'
-        )
+    @property
+    def saldo(self):
+        return self._Banco__saldo
 
     def sacar(self):
         print('\nPrezado cliente em conta poupanca nao eh possivel sacar\n')
  
 
-if __name__ == '__main__':
 
 
-    titular_poupanca_01 = ContaPoupanca(
-        nome='Carlos', 
-        saldo=5000.00, 
-        numero_conta=12345-8
-    )
-    titular_poupanca_02 = ContaPoupanca(
-        nome='Arthur', 
-        saldo=2500.00, 
-        numero_conta=14723-9
-    )
+titular_poupanca_01 = ContaPoupanca(
+    nome='Carlos', 
+    saldo=5000.00, 
+    numero_conta='12345-8'
+)
+titular_poupanca_02 = ContaPoupanca(
+    nome='Arthur', 
+    saldo=2500.00, 
+    numero_conta='14723-9'
+)
 
-    titular_poupanca_01.ver_saldo()
-    titular_poupanca_02.ver_saldo()
+titular_01 = ContaCorrente(
+    nome='Joao', 
+    saldo=5000.00, 
+    numero_conta='12345-8'
+)
+titular_02 = ContaCorrente(
+    nome='Ana', 
+    saldo=2500.00, 
+    numero_conta="14723-9"
+)
 
-    titular_poupanca_01.sacar()
+print(titular_poupanca_01.saldo())
+print(titular_poupanca_02.saldo())
+#titular_poupanca_01.sacar()
+
+print('-'*30)
+
+#titular_01.saldo()
+#titular_02.saldo()
+#titular_01.sacar()
+
+
+
 

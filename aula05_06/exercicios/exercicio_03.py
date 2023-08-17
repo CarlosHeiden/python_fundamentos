@@ -101,6 +101,6 @@ if __name__=='__main__':
     print('-'*30)
     print(carro_2.ligar())
     print(carro_2.parar())
-    print(carro_2.estacionado())
+    carro_2.estacionado()
     print('-'*30)
-    print(carro_2.estacionado())
+    carro_2.estacionado()
