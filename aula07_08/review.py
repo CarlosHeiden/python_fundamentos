@@ -270,14 +270,17 @@ class LogicaProgramacao(LogicaBanco):
                     numero_retornado = self.retorna_maior_numero(numero_1, numero_2)
                     if numero_retornado != None:
                         print(f'O maior número é: {numero_retornado}')
+                        registro_string = f'(retorna_maior_numero) O maior número é: {numero_retornado} '
 
                 elif funcao_selecionada == 4:
                     numero_1 = int(input('Informe o primeiro número: '))
                     numero_2 = int(input('Informe o segundo número: '))
                     
-                    numero_retornado = self.retorna_maior_numero(numero_1, numero_2)
+                    numero_retornado = self.retorna_menor_numero(numero_1, numero_2)
                     if numero_retornado != None:
-                        print(f'O maiomenor número é: {numero_retornado}')
+                        print(f'O menor número é: {numero_retornado}')
+                        registro_string = f'(retorna_menor_numero) O menor número é: {numero_retornado} '
+
 
                 elif funcao_selecionada == 5:
                     numero = int(input('Informe um número: '))
@@ -285,6 +288,8 @@ class LogicaProgramacao(LogicaBanco):
 
                     if resultado != '':
                         print(f'O número {numero} é {resultado}!')
+                        registro_string = f'(verifica_se_eh_impar_ou_par) O número {numero} é {resultado}!'
+
 
                 elif funcao_selecionada == 6:
                     lista_de_dados = []
@@ -301,6 +306,8 @@ class LogicaProgramacao(LogicaBanco):
 
                     maior_numero = self.retorna_maior_numero_em_lista(lista_de_dados)
                     print(f'O maior número da lista é: {maior_numero}')
+                    registro_string = f'(retorna_maior_numero_em_lista) O maior número da lista é: {maior_numero}'
+
 
                 elif funcao_selecionada == 7:
                     lista_de_dados = []
@@ -317,6 +324,9 @@ class LogicaProgramacao(LogicaBanco):
 
                     menor_numero = self.retorna_menor_numero_em_lista(lista_de_dados)
                     print(f'O menor número da lista é: {menor_numero}')
+                    registro_string = f'(retorna_menor_numero_em_lista) O menor número da lista é: {menor_numero}'
+
+
 
                 elif funcao_selecionada == 8:
                     lista_de_dados = []
@@ -333,6 +343,9 @@ class LogicaProgramacao(LogicaBanco):
 
                     qty_par, qty_impar = self.retorna_quantidade_de_impares_e_pares_em_lista(lista_de_dados)
                     print(f'A quantidade de pares é {qty_par} e de ímpares é {qty_impar}')
+                    registro_string = f'(retorna_quantidade_de_impares_e_pares_em_lista) A quantidade de pares é {qty_par} e de ímpares é {qty_impar} '
+
+
 
                 elif funcao_selecionada == 9:
                     numero_1 = int(input('Informe o primeiro número: '))
@@ -352,11 +365,14 @@ class LogicaProgramacao(LogicaBanco):
                             if operacao in [1, 2, 3, 4]:
                                 resultado = self.rodar_calculadora(numero_1, numero_2, operacao)
                                 print(f'O resultado da operação é: {resultado}')
+                                registro_string = f'(rodar_calculadora) O resultado da operação é: {resultado}'
                                 break
                             else:
                                 print('Informe uma operação válida!')
+                                registro_string = f'(rodar_calculadora) Informe uma operação válida!'
                         except:
                             print('Informe um número válido')
+                            registro_string = f'(rodar_calculadora) Informe um número válido !'
 
                 elif funcao_selecionada == 10:
                     letra = input('Informe a letra: ')
@@ -367,9 +383,11 @@ class LogicaProgramacao(LogicaBanco):
                         print(f'A letra {letra} apareceu {letras}')
                         print(f'Apareceram {numeros} numeros')
                         print(f'dentro do texto: {texto}')
+                        registro_string = f'(verifica_letra_em_string) {letra}, {letras}, {numeros}, {texto}'
                     else:
                         print('Informe apenas uma letra', end=' ')
                         print('e um texto com pelo menos 10 letras.')
+                        registro_string = f'(verifica_letra_em_string) Informe apenas uma letra, minimo 10 letras'
 
                 elif funcao_selecionada == 11:
                     try:
@@ -385,10 +403,13 @@ class LogicaProgramacao(LogicaBanco):
                             )
 
                             print(f'O resultado é: {resultado}')
+                            registro_string = f'(calcular_salario)Resultado = {resultado}'
                         else:
                             print(
                                 'Informe valores válidos!'
                             )
+                            registro_string = f'(calcular_salario) Informe valores válidos!'
+
                     except Exception as e:
                         print(f'Erro: {str(e)}')
                         print('Informe números válidos!')
@@ -399,9 +420,11 @@ class LogicaProgramacao(LogicaBanco):
                         strings, ints, floats = self.organizador_lista(lista)
                         print(f'Na lista informada existem {strings} strings', end=' ')
                         print(f'{ints} inteiros, e {floats} floats')
+                        registro_string = f'(organizador_lista) {strings}, {ints}, {floats}, lista OK '
                     else:
                         print('A lista precisa de pelos menos', end=' ')
                         print('2 strings, 2 ints e 2 floats!')
+                        registro_string = f'(organizador_lista) Faltam quantidade minima em cada parametro lista'
 
                 elif funcao_selecionada == 13:
                     ...
