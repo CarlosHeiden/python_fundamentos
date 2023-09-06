@@ -102,9 +102,24 @@ class LogicaBanco:
         try:
             # usar select para mostrar quantidade de registros
             # adicionar como opcao no main em review.py
-            ...
+            conn = self.criar_conexao('base.db')
+            cursor = conn.cursor()
+    
+            sql_string = f"""
+            SELECT COUNT(*) FROM {nome_tabela} 
+            """            
+        
+            cursor.execute(sql_string)
+            count = cursor.fetchone()[0]
+            cursor.close()
+            conn.commit()
+            conn.close()
+            #print(f'A quantidade de registros da tabela "{nome_tabela}" eh: {count} ')
+            return  count
         except Exception as e:
-            print(f'Erro: {str(e)}')
+            print(f"Erro ao selecionar a quantidade de registros da tabela {nome_tabela}: {e}")
+            return None
+    
 
 
 if __name__ == '__main__':

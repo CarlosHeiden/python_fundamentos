@@ -226,6 +226,7 @@ class LogicaProgramacao(LogicaBanco):
 12 - organizador_lista
 13 - selecionar_ultimo_registro
 14 - excluir_registro
+15 - mostrar_quantidade_registros
 --> opcao: '''
 
         while True:
@@ -427,8 +428,10 @@ class LogicaProgramacao(LogicaBanco):
                         registro_string = f'(organizador_lista) Faltam quantidade minima em cada parametro lista'
 
                 elif funcao_selecionada == 13:
-                    ...
-
+                    nome_tabela = input('Informe o nome da tabela: ')
+                    ultimo_registro = self.selecionar_ultimo_registro_inserido(nome_tabela)
+                    registro_string = f'(selecionar_ultimo_registro_inserido) ultimo registro = {ultimo_registro}'
+                  
                 elif funcao_selecionada == 14:
                     try:
                         nome_tabela = input('Informe o nome da tabela: ')
@@ -442,6 +445,18 @@ class LogicaProgramacao(LogicaBanco):
                     except Exception as e:
                         print(f'Erro ao tentar excluir linha "{id}" da tabela "{nome_tabela}": {e}')    
                         registro_string = f'(deletar_registro) Erro ao tentar excluir linha "{id}" da tabela "{nome_tabela}": {e}'
+
+                elif funcao_selecionada == 15:
+                    try:
+                        nome_tabela = input('Informe o nome da tabela: ')
+                        qtd_registros = self.selecionar_quantidade_registros(nome_tabela)
+                        print(f'A quantidade de registros da tabela "{nome_tabela}" eh: {qtd_registros}')
+                        registro_string = f'(selecionar_quantidade_registros) A quantidade de registros da tabela "{nome_tabela}" eh: {qtd_registros}'
+                
+                    except Exception as e:
+                        print(f'Erro ao tentar apresentar qtd de registros da tabela "{nome_tabela}": {e}')    
+                        registro_string = f'(selecionar_quantidade_registros) Erro ao tentar apresentar qtd de registros da tabela "{nome_tabela}": {e}'
+
 
 
                 self.insere_registro('registros', registro_string)
