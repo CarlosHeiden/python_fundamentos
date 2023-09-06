@@ -1,0 +1,83 @@
+# arquivo review_db.py
+
+import os
+import sqlite3
+from datetime import datetime
+
+class LogicaBanco:
+
+    def deletar_registro(self, id_linha, nome_tabela):
+            try:
+                conn = self.criar_conexao('base.db')
+                cursor = conn.cursor()
+
+                # Verifica se o ID selecionado na tabela é válido
+                sql_string = f"SELECT * FROM {nome_tabela} WHERE ID = {id_linha}"
+                cursor.execute(sql_string)
+                registro = cursor.fetchone()
+                if not registro:
+                    cursor.close()
+                    conn.close()
+                    return
+
+                # Exclui o registro da tabela
+                sql_string = f"DELETE FROM {nome_tabela} WHERE ID = {id_linha}"
+                cursor.execute(sql_string)
+                cursor.close()
+                conn.commit()
+                conn.close()
+
+                # Verifica se o registro foi excluído corretamente
+                conn = self.criar_conexao('base.db')
+                cursor = conn.cursor()
+                sql_string = f"SELECT * FROM {nome_tabela} WHERE ID = {id_linha}"
+                cursor.execute(sql_string)
+                registro = cursor.fetchone()
+                if registro:
+                    print(f"Erro ao excluir registro {id_linha} da tabela {nome_tabela}: registro não foi excluído")
+                else:
+                    print(f"Registro {id_linha} excluído com sucesso da tabela {nome_tabela}")
+                cursor.close()
+                conn.close()
+
+            except Exception as e:
+                print(f'Erro ao excluir registro {id_linha} da tabela {nome_tabela}: {str(e)}')
+
+
+
+
+#arquivo review.py
+
+import os
+from review_db import LogicaBanco
+
+class LogicaProgramacao(LogicaBanco):
+    def __init__(self, nome):
+        self.nome = nome
+
+
+     def main(self):
+      try:
+            nome_tabela = input('Informe o nome da tabela: ')
+            id_linha = input('Informe o ID para excluir a linha: ')
+
+            
+
+            if id_linha or nome_tabela == None:
+                print(f'ERRO > DIGITE VALORES VALIDOS!!! > linha = {id_linha}, tabela = {nome_tabela}')
+                registro_string = f'(deletar_registro) DIGITE VALORES VALIDOS!!! > linha = {id_linha}, tabela = {nome_tabela}'
+            else:
+                self.deletar_registro(id_linha, nome_tabela)
+                print(f'A linha {id_linha} da tabela {nome_tabela} foi excluida com sucesso!')
+                registro_string = f'(deletar_registro) A linha {id_linha} da tabela {nome_tabela} foi excluida com sucesso!'
+        
+        except Exception as e:
+            print(f'Erro ao tentar excluir linha "{id_linha}" da tabela "{nome_tabela}": {e}')    
+            registro_string = f'(deletar_registro) Erro ao tentar excluir linha "{id_linha}" da tabela "{nome_tabela}": {e}'
+
+
+           
+
+
+                
+        

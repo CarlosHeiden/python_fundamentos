@@ -430,12 +430,18 @@ class LogicaProgramacao(LogicaBanco):
                     ...
 
                 elif funcao_selecionada == 14:
-                    nome_tabela = input('Informe o nome da tabela: ')
-                    id_linha = input('Informe o ID para excluir a linha: ')
-                    self.deletar_registro(id_linha, nome_tabela)
-                    print(f'A linha {id_linha} da tabela {nome_tabela} foi excluida com sucesso!')
-                    registro_string = f'(deletar_registro) A linha {id_linha} da tabela {nome_tabela} foi excluida com sucesso!'
-                    
+                    try:
+                        nome_tabela = input('Informe o nome da tabela: ')
+                        id = input('Informe o ID para excluir a linha: ')
+
+                        
+                        self.deletar_registro(id, nome_tabela)
+                        
+                        registro_string = f'(deletar_registro) A linha {id} da tabela {nome_tabela} foi excluida com sucesso!'
+                
+                    except Exception as e:
+                        print(f'Erro ao tentar excluir linha "{id}" da tabela "{nome_tabela}": {e}')    
+                        registro_string = f'(deletar_registro) Erro ao tentar excluir linha "{id}" da tabela "{nome_tabela}": {e}'
 
 
                 self.insere_registro('registros', registro_string)
