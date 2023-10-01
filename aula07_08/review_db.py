@@ -49,7 +49,7 @@ class LogicaBanco:
             cursor.close()
             conn.commit()
             conn.close()
-            print(f'Dados inseridos em {nome_tabela} com sucesso!')
+            print(f'REGISTRO LOG inserido em {nome_tabela} com sucesso!')
         except Exception as e:
             print(f'Erro: {str(e)}')
 
@@ -78,36 +78,48 @@ class LogicaBanco:
     
     
 
-    def deletar_registro(self, id_linha, nome_tabela):
+    def deletar_registro(self, id, nome_tabela):
         try:
             conn = self.criar_conexao('base.db')
             cursor = conn.cursor()
-    
-            sql_string = f"""
-            select * from {nome_tabela}
-            where id = {id_linha}
-            """            
-    
+
+           
+            # Exclui o registro da tabela
+            sql_string = f"DELETE FROM {nome_tabela} WHERE ID = {id}"
             cursor.execute(sql_string)
-            linha = cursor.fetchone()[0]
-            if linha is None:
-                print(f'Nenhum registro encontrado em {nome_tabela}.')
-            else:
-                print(f'linha {id_linha} da tabela {nome_tabela} foi excluida com sucesso')
-        except Exception as e:
-            print(f'Erro ao selecionar o ID da tabela {nome_tabela}: {str(e)}')
-        finally:
             cursor.close()
+            conn.commit()
             conn.close()
+            print(f'A linha {id} da tabela {nome_tabela} foi excluida com sucesso!')
+
+        except Exception as e:
+            print(f'Erro ao excluir registro {id} da tabela {nome_tabela}: {str(e)}')
+
+            
     
 
     def selecionar_quantidade_registros(self, nome_tabela):
         try:
             # usar select para mostrar quantidade de registros
             # adicionar como opcao no main em review.py
-            ...
+            conn = self.criar_conexao('base.db')
+            cursor = conn.cursor()
+    
+            sql_string = f"""
+            SELECT COUNT(*) FROM {nome_tabela} 
+            """            
+        
+            cursor.execute(sql_string)
+            count = cursor.fetchone()[0]
+            cursor.close()
+            conn.commit()
+            conn.close()
+            #print(f'A quantidade de registros da tabela "{nome_tabela}" eh: {count} ')
+            return  count
         except Exception as e:
-            print(f'Erro: {str(e)}')
+            print(f"Erro ao selecionar a quantidade de registros da tabela {nome_tabela}: {e}")
+            return None
+    
 
 
 if __name__ == '__main__':
