@@ -1,0 +1,16 @@
+python funcional
+segundo paradigma (livro)
+
+oque é uma funcao: Uma função é um bloco de código que pode
+ ser chamado conforme a necessidade
+este bloco de código tem a caracterista de responsabilidade unica
+
+3 paradigma orientacao a objeto
+
+orientacao a objeto e baseada toda em cima as caracteristicas de uma classe
+
+Monolito
+um monolito eh quando eu tenho centralizado em um unico projeto nosso front-end e nosso back -end
+
+Micro servico    nos dividimos o back end  em um 
+projeto e o front end em outro
